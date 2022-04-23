@@ -1,9 +1,4 @@
-.categories-container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+
 
 .category-container {
   min-width: 30%;
@@ -62,6 +57,8 @@
 
     h2 {
       font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
       margin: 0 6px 0;
       font-size: 22px;
       color: #4a4a4a;
