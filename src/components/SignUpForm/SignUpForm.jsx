@@ -5,7 +5,7 @@ import {
 } from '../../utils/firebase/firebase';
 import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
-import './SignUpForm.scss'
+import './SignUpForm.scss';
 
 const defaultFormFields = {
   displayName: '',
@@ -17,6 +17,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = React.useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +36,7 @@ const SignUpForm = () => {
         email,
         password
       );
-      
+
       await createUserDocFromAuth(user, { displayName });
       setFormFields(defaultFormFields);
       alert('Sign up successful');
@@ -53,7 +54,7 @@ const SignUpForm = () => {
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="Display Name"
+          label='Display Name'
           type='text'
           required
           onChange={handleChange}
@@ -61,7 +62,7 @@ const SignUpForm = () => {
           value={displayName}
         />
         <FormInput
-          label="Email"
+          label='Email'
           type='email'
           required
           onChange={handleChange}
@@ -69,7 +70,7 @@ const SignUpForm = () => {
           value={email}
         />
         <FormInput
-          label="Password"
+          label='Password'
           type='password'
           required
           onChange={handleChange}
@@ -77,7 +78,7 @@ const SignUpForm = () => {
           value={password}
         />
         <FormInput
-          label="Confirm Password"
+          label='Confirm Password'
           type='password'
           required
           onChange={handleChange}

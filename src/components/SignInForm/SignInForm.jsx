@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopUp,
@@ -24,16 +23,14 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopUp();
-    await createUserDocFromAuth(user);
+    await signInWithGooglePopUp();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(res);
+      await signInAuthUserWithEmailAndPassword(email, password);
       setFormFields(defaultFormFields);
       alert('Sign in successful');
     } catch (error) {
