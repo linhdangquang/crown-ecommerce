@@ -8,18 +8,17 @@ const Category = () => {
   const { category } = useParams();
   const { categoriesMap } = useContext(CategoriesContext);
   const [products, setProducts] = React.useState([categoriesMap[category]]);
-  console.log(category);
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [categoriesMap, category]);
   console.log(products);
   return (
     <>
-      <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+      <CategoryTitle>{category?.toUpperCase()}</CategoryTitle>
 
       <CategoryContainer>
         {products &&
-          products.map((product) => <ProductCard product={product} />)}
+          products?.map((product) => <ProductCard product={product} />)}
       </CategoryContainer>
     </>
   );
