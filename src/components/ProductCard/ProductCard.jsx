@@ -5,7 +5,7 @@ import { Footer, Name, Price, ProductCardContainer } from './product-card.styles
 
 
 const ProductCard = ({ product }) => {
-  const { name, price, imageUrl, id } = product;
+  const { name, price, imageUrl} = product;
 
   const { addItemToCart } = useContext(CartContext);
 

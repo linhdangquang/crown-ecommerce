@@ -7,11 +7,10 @@ import { CategoryContainer, CategoryTitle } from './category.styles';
 const Category = () => {
   const { category } = useParams();
   const { categoriesMap } = useContext(CategoriesContext);
-  const [products, setProducts] = React.useState([categoriesMap[category]]);
+  const [products, setProducts] = React.useState([]);
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [categoriesMap, category]);
-  console.log(products);
   return (
     <>
       <CategoryTitle>{category?.toUpperCase()}</CategoryTitle>
