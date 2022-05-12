@@ -5,18 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { CategoriesProvider } from './contexts/CategoriesContext';
 import { CartProvider } from './contexts/Cart';
 import { store } from './store/store';
 
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-        <CategoriesProvider>
           <CartProvider>
             <App />
           </CartProvider>
-        </CategoriesProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')
