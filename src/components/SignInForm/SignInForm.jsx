@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   createUserDocFromAuth,
   signInAuthUserWithEmailAndPassword,
@@ -16,7 +17,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = React.useState(defaultFormFields);
   const { email, password } = formFields;
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
@@ -32,6 +33,7 @@ const SignInForm = () => {
     try {
       await signInAuthUserWithEmailAndPassword(email, password);
       setFormFields(defaultFormFields);
+      navigate('/');
       alert('Sign in successful');
     } catch (error) {
       switch (error.code) {
