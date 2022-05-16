@@ -1,10 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  createUserDocFromAuth,
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopUp,
-} from '../../utils/firebase/firebase';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 import Button, {BUTTON_TYPES} from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
 import { ButtonsContainer, SignInContainer } from './sign-in-form.styles';
@@ -18,20 +15,21 @@ const SignInForm = () => {
   const [formFields, setFormFields] = React.useState(defaultFormFields);
   const { email, password } = formFields;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const signInWithGoogle = async () => {
-    await signInWithGooglePopUp();
+  const signInWithGoogle =  () => {
+    dispatch(googleSignInStart());
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await signInAuthUserWithEmailAndPassword(email, password);
+      dispatch(emailSignInStart(email, password))
       setFormFields(defaultFormFields);
       navigate('/');
       alert('Sign in successful');
