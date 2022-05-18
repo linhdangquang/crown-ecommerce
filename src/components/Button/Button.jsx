@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   BaseButton,
+  ButtonSpinner,
   GoogleSignInButton,
   InvertedButton,
 } from './button.styles';
@@ -18,9 +19,13 @@ const getButton = (buttonType = BUTTON_TYPES.base) =>
     [BUTTON_TYPES.inverted]: InvertedButton,
   }[buttonType]);
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+const Button = ({ children, buttonType, isLoading, ...otherProps }) => {
   const ButtonComponent = getButton(buttonType);
-  return <ButtonComponent {...otherProps}>{children}</ButtonComponent>;
+  return (
+    <ButtonComponent disabled={isLoading} {...otherProps}>
+      {isLoading ? <ButtonSpinner/> : children}
+    </ButtonComponent>
+  );
 };
 
 export default Button;
