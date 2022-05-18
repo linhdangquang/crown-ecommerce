@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import Button, { BUTTON_TYPES } from '../Button/Button';
-import { FormContainer, PaymentButton, PaymentFormContainer } from './payment-form.styles';
+import { BUTTON_TYPES } from '../Button/Button';
+import {
+  FormContainer,
+  PaymentButton,
+  PaymentFormContainer,
+} from './payment-form.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartTotal } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
@@ -37,8 +41,6 @@ const PaymentForm = () => {
       paymentIntent: { client_secret },
     } = response;
 
-    console.log(response);
-
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement),
@@ -68,7 +70,12 @@ const PaymentForm = () => {
         <h2>Credit Card Payment: </h2>
         <CardElement />
 
-        <PaymentButton buttonType={BUTTON_TYPES.inverted} isLoading={isProcessingPayment}>Pay</PaymentButton>
+        <PaymentButton
+          buttonType={BUTTON_TYPES.inverted}
+          isLoading={isProcessingPayment}
+        >
+          Pay
+        </PaymentButton>
       </FormContainer>
     </PaymentFormContainer>
   );
