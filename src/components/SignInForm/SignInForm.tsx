@@ -1,4 +1,5 @@
-import React from 'react';
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
+import React, { ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
@@ -16,7 +17,7 @@ const SignInForm = () => {
   const { email, password } = formFields;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
   };
@@ -25,25 +26,17 @@ const SignInForm = () => {
     dispatch(googleSignInStart());
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      dispatch(emailSignInStart(email, password))
+      await dispatch(emailSignInStart(email, password))
       setFormFields(defaultFormFields);
       navigate('/');
       alert('Sign in successful');
     } catch (error) {
-      switch (error.code) {
-        case 'auth/wrong-password':
-          alert('Wrong password');
-          break;
-
-        case 'auth/user-not-found':
-          alert('User not found');
-          break;
-        default:
-          break;
+      if ((error as AuthError).code === 'auth/user-not-found') {
+        alert('Email not found');
       }
       console.log(error);
     }
