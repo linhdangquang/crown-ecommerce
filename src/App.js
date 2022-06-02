@@ -3,6 +3,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkUserSession } from './store/user/user.action';
 import Spinner from './components/Spinner/Spinner';
+import { GlobalStyle } from './global.styles';
 
 const Home = lazy(() => import('./routes/Home/Home'));
 const Authentication = lazy(() =>
@@ -20,6 +21,7 @@ const App = () => {
   }, [dispatch]);
   return (
     <Suspense fallback={<Spinner />}>
+      <GlobalStyle />
       <Routes>
         <Route path='/' element={<Navigator />}>
           <Route index element={<Home />} />
